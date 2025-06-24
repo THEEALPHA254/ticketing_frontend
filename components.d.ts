@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    _Boilerplate: typeof import('./src/components/_Boilerplate.vue')['default']
     BreadCrumb: typeof import('./src/components/BreadCrumb.vue')['default']
     ContextMenu: typeof import('./src/components/ContextMenu.vue')['default']
     copy: typeof import('./src/components/LoadingSpinner copy.vue')['default']

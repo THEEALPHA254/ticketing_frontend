@@ -10,127 +10,12 @@
           
           <!-- super admin menu options -->
           
-          <!-- <v-list-item :active="checkIfActive('clients')"  
+          <v-list-item :active="checkIfActive('clients')"  
           prepend-icon="mdi-account-group-outline" title="Clients" value="m-clients"
           v-if="g_Store.isSuperAdmin()"
           :to="{ name: 'clients'}"
-          ></v-list-item> -->
+          ></v-list-item>
           
-          <!-- <v-list-item :active="checkIfActive('pos')"  
-          prepend-icon="mdi-cart-minus" title="Pos" value="m-clients"
-          v-if="!g_Store.isSuperAdmin()"
-          :to="{ name: 'pos'}"
-          ></v-list-item> -->
-          
-          <!-- <v-list-item :active="checkIfActive('users')"  
-          v-if="!g_Store.isSuperAdmin()"
-          :to="{ name: 'users'}"          
-          prepend-icon="mdi-account-tie" title="Users" value="users"></v-list-item> -->
-
-          
-          <!-- <v-list-item :active="checkIfActive('orders')" prepend-icon="mdi-message-outline"   title="Chats" value="chats"
-          v-if="g_Store.isAdmin()"
-          
-          ></v-list-item> -->
-
-          <!-- <v-list-item :active="checkIfActive('contacts')" prepend-icon="mdi-account-group-outline"   title="Contacts" value="Contacts"
-          v-if="g_Store.isAdmin()"
-          :to="{ name: 'contacts'}"
-          ></v-list-item> -->
-
-          <!-- <v-list-item :active="checkIfActive('orders')" prepend-icon="mdi-bullhorn-outline"   title="Campaigns" value="campaigns"
-          v-if="g_Store.isAdmin()"
-          :to="{ name: 'campaigns' }"
-          ></v-list-item> -->
-<!-- 
-          <v-list-item :active="checkIfActive('orders')" prepend-icon="mdi-message-fast-outline"   title="Templates" value="templates"
-          v-if="g_Store.isAdmin()"
-          :to="{ name: 'message-templates' }"
-          ></v-list-item> -->
-
-
-        <!-- <v-list-group value="clients" v-if="!g_Store.isSuperAdmin()">
-            <template v-slot:activator="{ props }">
-              <v-list-item v-bind="props"  title="Configs" value="configs">
-                <template v-slot:prepend>
-                <v-icon size="small" icon="mdi-cog-outline"></v-icon>
-              </template>
-              </v-list-item>
-            </template> -->
-
-
-            <!-- <v-list-item :active="checkIfActive('settings')" prepend-icon="mdi-cogs"   title="Accounts" value="settings" 
-              
-            ></v-list-item>
-
-
-            <v-list-item title="Chat Labels"value="chat-labels" rounded="lg" 
-            v-if="true && !g_Store.isSuperAdmin()"
-            >
-              <template v-slot:prepend>
-                <v-icon size="small" icon="mdi-label-outline" class="mr-0"></v-icon>
-              </template>
-            </v-list-item>
-      
-            <v-list-item title="Chat Statuses"  value="disposition-statuses" rounded="lg" 
-            v-if="true && !g_Store.isSuperAdmin()"
-            >
-              <template v-slot:prepend>
-                <v-icon size="small" icon="mdi-list-status" class="mr-0"></v-icon>
-              </template>
-            </v-list-item>
-      
-    
-            <v-list-item title="Conversation Reports"  value="chat-reports" rounded="lg" 
-            v-if="true && !g_Store.isSuperAdmin()"
-            >
-              <template v-slot:prepend>
-                <v-icon size="small" icon="mdi-file-chart-outline" class="mr-0"></v-icon>
-              </template>
-            </v-list-item> -->
-
-            
-
-
-            <!-- <v-list-item title="Setup Payments" :to="{ name: 'payment-config'}" value="payments" rounded="lg" 
-            v-if="true && !g_Store.isSuperAdmin()"
-            >
-              <template v-slot:prepend>
-                <v-icon size="small" icon="mdi-credit-card-outline" class="mr-0"></v-icon>
-              </template>
-            </v-list-item> -->
-
-            <!-- <v-list-item  :active="checkIfActive('tags')" v-if="g_Store.isAdmin()" :to="{ name: 'tags'}" title="Tags" value="tags" rounded="lg">
-            <template v-slot:prepend>
-              <v-icon size="small" icon="mdi-label-outline"></v-icon>
-            </template>
-          </v-list-item>
-      
-          <v-list-item title="Payment Configurations" :to="{ name: 'payment-configurations'}" value="payment-configurations" rounded="lg" 
-          v-if="!g_Store.isSuperAdmin()"
-          >
-            <template v-slot:prepend>
-              <v-icon size="small" icon="mdi-credit-card-outline" class="mr-0"></v-icon>
-            </template>
-          </v-list-item> -->
-
-      
-            <!-- <v-list-item title="Flow Builder" :to="{ name: 'flow-builder'}" value="flow-builder" rounded="lg" 
-            v-if="g_Store.isSuperAdmin()"
-            >
-              <template v-slot:prepend>
-                <v-icon size="small" icon="mdi-source-branch" class="mr-0"></v-icon>
-              </template>
-            </v-list-item> -->
-
-            <!-- <v-list-item title="Meta Forms" :to="{ name: 'meta-forms'}" value="meta-forms" rounded="lg"       
-            v-if="g_Store.isSuperAdmin()"
-            >
-              <template v-slot:prepend>
-                <v-icon size="small" icon="mdi-file-document" class="mr-0"></v-icon>
-              </template>
-            </v-list-item> -->
-        <!-- </v-list-group> -->
 
           <!-- <v-list-item :active="checkIfActive('orders')" prepend-icon="mdi-auto-fix"   title="Flows" value="orders"></v-list-item> -->
           <v-list-item :active="checkIfActive('orders')" @click.prevent="triggerLogout"  prepend-icon="mdi-logout"   title="Sign Out" value="orders"></v-list-item>
