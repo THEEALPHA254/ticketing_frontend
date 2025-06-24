@@ -1,14 +1,16 @@
 <template>
   <div>
     <div v-if="g_Store.isAdmin()">
-      Admin Login.
+      <AdminDashboard />
     </div>
 
-    <v-sheet v-else class="d-flex flex-column align-center justify-center text-subtitle-2 rounded-sm "
-    style="height: 40vh;"
-    >
-      SuperAdmin Login.
-    </v-sheet>
+    <div v-if="g_Store.isUser()">
+      <UserDashboard/>
+    </div>
+
+    <div v-if="g_Store.isSuperAdmin()" >
+      <SuperDashboard />
+    </div>
   </div>
 </template>
 
@@ -19,10 +21,14 @@ import { globalStore } from "@/stores/globalStore";
 import { useRoute, useRouter } from 'vue-router'
 import axiosInst, { baseURL } from '@/services/api'
 import { Toaster, toast } from 'vue-sonner'
+import UserDashboard from './authLayout/dashboards/UserDashboard.vue';
+import AdminDashboard from './authLayout/dashboards/AdminDashboard.vue';
+import SuperDashboard from './authLayout/dashboards/SuperDashboard.vue';
 
 const route = useRoute()
 const router = useRouter();
 const store = AuthStore();
 const g_Store = globalStore();
+
 
 </script>

@@ -76,6 +76,14 @@ export const globalStore = defineStore("globalStore", () => {
       }
     }
 
+    function isUser() {
+      if (getUserData().user_type == 'user') {
+        return true
+      } else {
+        return false
+      }
+    }
+
 
     //fetching all clients
     function fetchClients(){
@@ -590,6 +598,7 @@ function getPurchaseOrderName(id){
     getUserData,
     isSuperAdmin,
     isAdmin,
+    isUser,
     showLogoutModal,
     hideLogoutModal,
     fetchClients,

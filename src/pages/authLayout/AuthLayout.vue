@@ -15,6 +15,7 @@
   <v-row class="mt-10">
     <v-col cols="12" md="4" offset-md="4">
       <v-card
+      v-if="!isRegistering"
       rounded="lg"
       class="mx-4 "
       elevation="0"
@@ -61,9 +62,102 @@
                       Sign In
               </v-btn>
             </v-col>
+
+            <!-- Register Link -->
+              <v-col cols="12" class="text-center mb-5">
+                <span class="text-caption">Don't have an account?</span>
+                <v-btn variant="text" color="primary" class="ml-1" style="font-size: 12px;" @click="isRegistering = true">
+                  Register
+                </v-btn>
+              </v-col>
           </v-row>
         </v-card-text>
       </v-card>
+
+      <!-- Register Card -->
+        <v-card
+          v-else
+          rounded="lg"
+          class="mx-4"
+          elevation="0"
+        >
+          <v-card-title>
+            <div class="text-subtitle-2 font-weight-bold">
+              Register a new account
+            </div>
+          </v-card-title>
+          <v-card-text>
+            <v-row class="mt-4">
+              <v-col cols="12">
+                <div class="my-3 text-subtitle-2">
+                  Username
+                </div>
+                <v-text-field placeholder="Username" density="compact" v-model="registerForm.username"
+                  variant="outlined"
+                  hide-details
+                  required>
+                </v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <div class="my-3 text-subtitle-2">
+                  First Name
+                </div>
+                <v-text-field placeholder="First Name" density="compact" v-model="registerForm.first_name"
+                  variant="outlined"
+                  hide-details
+                  required>
+                </v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <div class="my-3 text-subtitle-2">
+                  Last Name
+                </div>
+                <v-text-field placeholder="Last Name" density="compact" v-model="registerForm.last_name"
+                  variant="outlined"
+                  hide-details
+                  required>
+                </v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <div class="my-3 text-subtitle-2">
+                  Email
+                </div>
+                <v-text-field placeholder="Email" density="compact" v-model="registerForm.email"
+                  variant="outlined"
+                  hide-details
+                  required>
+                </v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <div class="my-3 text-subtitle-2">
+                  Password
+                </div>
+                <v-text-field placeholder="Password" density="compact" variant="outlined"
+                  v-model="registerForm.password"
+                  :append-inner-icon="showRegPass ? 'mdi-eye' : 'mdi-eye-off'" :type="showRegPass ? 'text' : 'password'" @click:append-inner="showRegPass=!showRegPass"
+                  required>
+                </v-text-field>
+              </v-col>
+              <v-col cols="12" class="mb-2">
+                <v-btn :loading="is_registering"
+                  @click="register"
+                  color="black"
+                  style="font-size: 12px;"
+                  variant="flat"
+                  block class="mt-4">
+                  Register
+                </v-btn>
+              </v-col>
+              <!-- Back to Login Link -->
+              <v-col cols="12" class="text-center mb-5">
+                <span class="text-caption">Already have an account?</span>
+                <v-btn variant="text" color="primary" class="ml-1" style="font-size: 12px;" @click="isRegistering = false">
+                  Sign In
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-card>
     </v-col>
   </v-row>
 
@@ -85,7 +179,7 @@ import { getHomeRouteForLoggedInUser } from '@/auth/utils'
 import { AuthStore } from '@/stores/authStore'
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import { globalStore } from '@/stores/globalStore'
-import axiosIns from '@/services/api'
+import axiosInst from '@/services/api'
 import TokenService from '@/core/auth/jwt/tokenService';
 import { PermissionStore } from '@/stores/permissions'
 import { useRoute, useRouter } from 'vue-router'
@@ -103,6 +197,18 @@ let formValues = ref({
 let is_submiting = ref(false)
 let show1 = ref(false)
 let show2 = ref(true)
+
+// Register state
+let isRegistering = ref(false)
+let is_registering = ref(false)
+let showRegPass = ref(false)
+let registerForm = ref({
+  username: '',
+  first_name: '',
+  last_name: '',
+  email: '',
+  password: '',
+})
 
 const forgotPass = () => {
   router.push({ name: 'forgot-password'})
@@ -129,7 +235,7 @@ const login = () => {
   // disable button
   is_submiting.value = true
 
-  axiosIns.post('/login/' , {
+  axiosInst.post('/login/' , {
     username: formValues.value.username,
     password: formValues.value.password,
   })
@@ -168,6 +274,36 @@ const login = () => {
       is_submiting.value = false
     })
 
+}
+
+// Register function
+const register = () => {
+  if (!registerForm.value.username || !registerForm.value.email || !registerForm.value.password) {
+    toast.error("All fields are required", { timeout: 2000 });
+    return;
+  }
+  is_registering.value = true;
+  const formData = {
+    username: registerForm.value.username,
+    first_name: registerForm.value.first_name,
+    last_name: registerForm.value.last_name,
+    email: registerForm.value.email,
+    password: registerForm.value.password,
+
+  }
+
+  axiosInst.post('/register/', formData)
+    .then(response => {
+      toast.success("Registration successful! Please sign in.", { timeout: 2000 });
+      isRegistering.value = false;
+      // Optionally clear form
+      registerForm.value = { username: '', first_name: '', last_name: '', email: '', password: '' };
+      is_registering.value = false;
+    })
+    .catch(error => {
+      toast.error("Registration failed. Try again.", { timeout: 3000 });
+      is_registering.value = false;
+    });
 }
 
 </script>

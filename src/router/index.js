@@ -9,6 +9,7 @@ import { createRouter, createWebHistory } from 'vue-router/auto'
 import { setupLayouts } from 'virtual:generated-layouts'
 import { routes } from 'vue-router/auto-routes'
 import HomeVue from "@/pages/index.vue";
+import configs from './routes/configs';
 
 
 
@@ -36,7 +37,7 @@ const router = createRouter({
       },
     },
 
-    // ...configs,
+     ...configs,
   ]
 })
 
